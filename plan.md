@@ -39,7 +39,7 @@ Keep this file in the repository and update task status each week. The GIC ITC w
 
 ## 1. Start (week 1, 2026-11-23 to 2026-11-28)
 
-- [ ] LT-001: Confirm project charter, roles, weekly cadence · 2026-11-26 to 2026-11-26 · TEK CHANSETHA
+- [x] LT-001: Confirm project charter, roles, weekly cadence · 2026-11-26 to 2026-11-26 · TEK CHANSETHA
 - [ ] LT-003: Compile requirements, user stories and proposal draft for PM review · 2026-11-26 to 2026-11-26 · SRENG SOPHEAKANHA
 - [ ] LT-004: Create Godot repository and base project · 2026-11-26 to 2026-11-26 · SOK SANA
 - [ ] LT-008: Draft seven-room world graph and entrances · 2026-11-26 to 2026-11-26 · TAK TOEK

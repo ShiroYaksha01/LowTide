@@ -1,230 +1,207 @@
 # LowTide
 
-**A puzzle-first Metroidvania for PC, built with Godot 4.**
+**A puzzle-first 2D Metroidvania for PC, built with Godot 4.**
 
 **Course:** IT Project Management (I5, 2026–2027 Semester 1)  
 **Team:** YAG V3, Final Year Project Team  
 **Repository:** [ShiroYaksha01/LowTide](https://github.com/ShiroYaksha01/LowTide)  
 **Official project start:** 23 November 2026  
-**Target submission:** 23 January 2027  
-**Final deadline:** 24 January 2027  
-**Planning baseline:** [plan.md](plan.md), v0.5 (proposed; pending team and instructor approval)
+**Target submission:** 23 January 2027 (or earlier if ready)  
+**Provisional external deadline:** 24 January 2027, pending instructor confirmation  
+**Working plan:** [plan.md](plan.md), v0.11 (proposed rolling baseline, not approved)
 
-> **Status as of 21 November 2026:** Concept and planning preparation. Implementation officially begins on 23 November 2026. No development task is claimed as completed or verified by this README. Refer to current GitHub Issues, pull requests, and test evidence for progress after the project starts.
+> **Status as of 25 November 2026:** Repository planning documentation is being synchronized with the self-managing team proposal. LT-001 is recorded complete in the repository; LT-002 is open pending scope review. Revised roles, availability and scope approval are not implied by this README. No completed game implementation or test result is asserted here. Consult linked issues, PRs, builds and test evidence.
 
 ## Project overview
 
-LowTide is a **Godot 4 PC puzzle-first Metroidvania** set across **seven interconnected rooms**. Players control **Low Tide** and **High Tide** to change routes and solve environmental puzzles, acquire a **Diving Bell** ability to access deep-water areas, and revisit earlier locations through meaningful return paths. The planned experience concludes with a lighthouse-ending puzzle.
+LowTide's product vision is a seven-room puzzle-first Metroidvania. Players change between **Low Tide** and **High Tide** to open routes, solve environmental puzzles, acquire a **Diving Bell** to enter deep-water areas, and return to earlier rooms through meaningful shortcuts. The game concludes with a lighthouse ending. The priority is a coherent beginning-to-ending playable route with safe recovery, not a large set of unfinished features.
 
-The baseline also includes basic combat, three checkpoints, and a complete start-to-finish playable route. The primary goal is a coherent, testable puzzle game, not an expansive feature set.
+### Proposed core and scope alternatives
 
-### Planned core features
+| Feature | Seven-room vision | Five-room alternative | Three-room alternative |
+|---|---|---|---|
+| Rooms | 7 | 5 | 3 |
+| Movement, tide puzzles and interactions | Required | Required | Required |
+| Diving Bell, ability-gated return | Required | Required | Required |
+| Session checkpoints | 3 | 2 | 1 |
+| Hazard/reset recovery | Required | Required | Required |
+| Ending | Lighthouse puzzle | Simplified puzzle | Completion trigger |
+| Tested Windows export | Required | Required | Required |
 
-- Seven interconnected rooms, R1 through R7.
-- Player-controlled Low/High Tide puzzles and responsive environmental objects.
-- Movement, jumping, room transitions, and interaction with switches and gates.
-- Diving Bell ability for underwater progression.
-- Persistent puzzle flags, shortcuts, and safe return paths within a play session.
-- Three checkpoints and session respawn.
-- Basic combat with one simple enemy type.
-- Lighthouse finale with an ending trigger.
-- Playtesting, accessibility of visual cues, and a PC release build.
-
-### Explicitly outside the baseline scope
-
-Boss fights, a second ability, realistic water simulation, disk save/load, and multiplayer are **not** part of the planned minimum viable product (MVP).
+Combat, one simple enemy, health UI and decorative art/audio extensions are conditional, not core commitments. Minimum readable tide, interaction and checkpoint feedback remains required. Boss fights, a second ability, realistic water simulation, disk save/load and multiplayer are excluded. The instructor must confirm allowed room count, menu requirements and deadline. See [MVP scope](docs/MVP_SCOPE.md) and [scope alternatives](docs/scope-alternatives.md) for requirements and task-level tradeoffs. No alternative is approved by this README.
 
 ## Team and responsibilities
 
-| Member | Responsibility |
-| --- | --- |
-| TEK CHANSETHA | Project management, game design, quality assurance, and documentation |
-| SOK SANA | Player movement, tide system, water mechanics, and combat |
-| SRENG SOPHEAKANHA | Interactions, gates, progression, and room transitions |
-| TAK TOEK | Room layouts, grayboxing, puzzles, and collision |
-| TANG NAKRY | Visuals, user interface, audio, and user guide |
+All five members are developers. Each manages their own estimates, implementation decisions, tests, documentation, progress and blockers. The PM coordinates shared decisions, not every individual activity.
 
-Planned capacity is **12 hours per member per week**. Assignments and estimates are provisional until confirmed by the team and instructor.
+| Member | Role | Ownership |
+|---|---|---|
+| TEK CHANSETHA | Project Manager + Game Systems Developer | Interactions, switches/gates, puzzle logic, player feedback, project governance and milestone acceptance |
+| TANG NAKRY | Technical Lead + Developer | Godot setup, tide mechanics, architecture, integration guidance and independent level testing |
+| SOK SANA | Gameplay Developer | Player movement, underwater traversal, gameplay, tide backup, tutorial/full-route tests |
+| SRENG SOPHEAKANHA | Game Systems Developer | State, persistence, checkpoints, transitions, system contracts and integrated testing |
+| TAK TOEK | Level Designer + Developer | Room construction, puzzle geometry, navigation, collision and level fixes |
 
-## Schedule and milestones
+Tek targets 40–50% of actual working time on development and integration, averaged across the project. The seven-room forecast assigns 35 core programming hours and 39 including conditional combat feedback. All developers select and estimate sprint work together; independent review applies to the PM and Technical Lead as well.
 
-| Period | Dates | Planned outcome | Tasks | Story Points |
-| --- | --- | --- | ---: | ---: |
-| Sprint 0 (Start and Design) | 23 Nov–4 Dec 2026 | Approved scope, architecture, tide feasibility | 22 | 63 |
-| Sprint 1 | 7–18 Dec 2026 | Playable R1–R3 and Rising Platform puzzle | 22 | 73 |
-| Sprint 2 | 21 Dec 2026–1 Jan 2027 | R4/R5, Floodgate shortcut, Diving Bell | 22 | 79 |
-| Sprint 3 | 4–15 Jan 2027 | R6/R7, combat, integrated ending | 21 | 83 |
-| Release | 18–23 Jan 2027 | Tested PC build, documentation, submission | 12 | 31 |
-| **Total** | | | **99** | **329** |
+## Planning and capacity
 
-Story Points represent **relative complexity, not working hours**. The proposed baseline estimates **429 task-hours**. See [plan.md](plan.md) for detailed effort estimates, dependencies, acceptance criteria, and weekly capacity assumptions.
+Use 9 hours/member/week including coordination as the conservative planning ceiling; 12 hours is nominal availability, not a promise. Over nine weeks the conservative capacity is 405 person-hours, including 22.5 coordination hours. The full backlog is 99 tasks, 329 provisional Story Points, 435 primary task-hours and 19 booked secondary hours (454 engineering hours). The seven-room candidate core is 406 engineering hours. The stress-adjusted engineering budget is 318.75 hours with a 20% overrun assumption. The core exceeds that budget by 87.25 hours. Additional review, weekly integration/promotion and unconfirmed menu work must be estimated before commitment.
 
-### Key milestone dates
+| Scope | Engineering estimate scenario | Balance vs stress budget |
+|---|---:|---:|
+| Seven-room core | 406 h | -87.25 h |
+| Five-room alternative | 376–397 h | -57.25 to -78.25 h |
+| Three-room alternative | 317–370 h | +1.75 to -51.25 h |
+
+Ranges are unvalidated simplification scenarios, not confidence intervals. Only the reduced Sprint 0 work and gates are candidates for initial approval; even they require confirmed availability. Four individual half-hour exceptions are outstanding. Later work is a forecast to be re-estimated on December 4 from prototypes, measured effort and instructor decisions.
+
+### Schedule and milestones
+
+| Period | Dates | Forecast outcome | Tasks | SP |
+|---|---|---|---:|---:|
+| Sprint 0 | Nov 23–Dec 4 | Prototype, scope decision and measured effort | 17 | 49 |
+| Sprint 1 | Dec 7–21 (review Dec 18) | R1–R3, Rising Platform | 27 | 87 |
+| Sprint 2 | Dec 21–Jan 4 (build Dec 31) | R4/R5, Floodgate, Diving Bell | 22 | 79 |
+| Sprint 3 | Jan 4–15 | R6/R7, ending; combat conditional | 21 | 83 |
+| Release/closing | Jan 18–23 | Verified PC build, documentation and submission | 12 | 31 |
+| **Full backlog** | | | **99** | **329** |
 
 | Milestone | Date |
-| --- | --- |
-| Proposal reviewed/submitted for approval | 27 Nov 2026 |
-| Design reviewed | 4 Dec 2026 |
-| Core mechanics demonstration | 11 Dec 2026 |
-| Sprint 1 review | 18 Dec 2026 |
-| Midterm demo (build ready by 31 Dec 2026) | 1 Jan 2027 |
-| Full graybox review (playthrough ready by 8 Jan) | 9 Jan 2027 |
-| Sprint 3 review / feature freeze | 15 Jan 2027 |
-| Release candidate | 22 Jan 2027 |
-| Submission-ready sign-off | 23 Jan 2027 |
-| Final submission deadline | 24 Jan 2027 |
+|---|---|
+| Proposal reviewed/submitted | 2026-11-27 |
+| Design review and re-estimation | 2026-12-04 |
+| Core mechanics demo | 2026-12-11 |
+| Sprint 1 review | 2026-12-18 |
+| Midterm demo (build evidence Dec 31) | 2027-01-04, provisional |
+| Full graybox review (playthrough Jan 8) | 2027-01-11, provisional |
+| Feature freeze | 2027-01-15 |
+| Release candidate | 2027-01-22 |
+| Submission-ready sign-off | 2027-01-23, target |
+| Final deadline | 2027-01-24, provisional |
 
-## Project documentation and progress sources
+These are forecast dates, not verified deliverables. The course schedule and weekend access must be confirmed. See the plan for gate evidence and dependency dates.
 
-| Source | Purpose | How to use it |
-| --- | --- | --- |
-| [plan.md](plan.md) | Planned scope, 99 task IDs, owners, dates, risks, estimates, dependencies, acceptance conditions | Start here for expected deliverables |
-| [GitHub Issues](https://github.com/ShiroYaksha01/LowTide/issues) | Task execution and blockers, when the team adopts issue tracking | Find issues with matching `LT-###` task IDs |
-| [Pull Requests](https://github.com/ShiroYaksha01/LowTide/pulls) | Implementation changes, discussion, and review evidence | Link each change to its task ID |
-| [Commit history](https://github.com/ShiroYaksha01/LowTide/commits) | Authored code and documentation changes | Inspect commits together with PRs, tests, and acceptance criteria |
-| GitHub project board (if created) | Work-in-progress workflow and sprint view | Use as a status overview, not sole proof of completion |
-| GIC ITC course website | **Course progress-check source of truth** | Keep its imported plan aligned with this repository plan |
+## Documentation and progress sources
 
-**Important:** The course website and `plan.md` must stay aligned after importing. The proposed plan's one-line checklist task format is intended to be compatible with the course importer. Avoid changing it solely for GitHub presentation. The estimate/acceptance register in `plan.md` may require separate entry in the course website.
+| Source | Purpose |
+|---|---|
+| [Project charter](docs/PROJECT_CHARTER.md) | Objectives, governance and approval record |
+| [MVP scope](docs/MVP_SCOPE.md) | Requirements, exclusions and scope decisions |
+| [Project plan](plan.md) | 99 IDs, owners, dates, estimates, risks, dependencies and acceptance conditions |
+| [Team working agreement](docs/team-working-agreement.md) | Autonomy, decision rights and reviews |
+| [Scope alternatives](docs/scope-alternatives.md) | Task-level scope scenarios |
+| [Sprint 0 acceptance](docs/sprint-0-acceptance.md) | Individual gate evidence and readiness checks |
+| [Actual-hours logs](docs/actual-hours/README.md) | Each developer's own effort record |
+| [Weekly summary](docs/actual-hours/weekly-summary.md) | PM consolidation, forecasts and capacity |
+| [Issues](https://github.com/ShiroYaksha01/LowTide/issues) and [PRs](https://github.com/ShiroYaksha01/LowTide/pulls) | Execution, blockers, reviews and evidence |
+| [Commit history](https://github.com/ShiroYaksha01/LowTide/commits) | Authored changes and integration history |
+| GIC ITC | Course progress-check source of truth; synchronize with plan and evidence |
 
-## How progress is tracked
-
-Each planned task has a stable ID from **`LT-001` to `LT-099`**. Reuse that ID consistently in the plan, GitHub Issue title, branch name, pull request, commit message, and evidence.
-
-Suggested issue workflow:
-
-1. **Backlog:** Planned but not ready to start.
-2. **To do:** Ready and assigned.
-3. **In progress:** Work is underway.
-4. **In review:** Implementation is submitted and awaiting validation.
-5. **Done:** The acceptance condition is met, the work has been reviewed or tested, and supporting evidence is available.
-
-For each Issue, record the task ID, owner, sprint, priority, planned date, Story Points, dependencies, acceptance criteria, and links to implementation or test evidence. **Closing an issue or checking a box is a status assertion, not independent proof.**
-
-### Example task traceability
-
-- **Plan:** `LT-005`, minimal movement feasibility scene.
-- **Issue title:** `LT-005: Try minimal movement feasibility scene`.
-- **Branch:** `feature/LT-005-player-movement`.
-- **Commit:** `feat(LT-005): add basic movement test scene`.
-- **Pull request:** Include `LT-005`, link the issue, and explain testing.
-- **Evidence:** A test scene that demonstrates movement and jumping, with an accessible test result or recording.
-- **Complete when:** Its acceptance criterion in [plan.md](plan.md) is satisfied and reviewed.
-
-These are **examples of a workflow**, not claims that `LT-005` has been completed.
-
-### Definition of Done
-
-A task counts as **verified complete** only when:
-
-- Its documented acceptance condition has been met.
-- The relevant implementation or document can be identified.
-- Review or testing has occurred.
-- Evidence is linked or available in the repository or course website.
-
-Milestones require demonstrated deliverables. A checklist alone is insufficient.
+Keep the plan's one-line `date to date` checklist format for import. Preview 99 tasks and ten milestones before saving; estimate/notes/dependency fields may require manual entry. Never baseline later forecast tasks as commitments simply because the importer accepts them.
 
 ## Developer setup
 
-The planned target is a **PC game using Godot 4**.
+Install the Godot 4 version agreed under LT-004 (see [Godot documentation](https://docs.godotengine.org/en/stable/)). Clone the repository:
 
-1. Install a compatible version of [Godot 4](https://docs.godotengine.org/en/stable/).
-2. Clone the repository:
-
-   ```bash
-   git clone https://github.com/ShiroYaksha01/LowTide.git
-   cd LowTide
-   ```
-
-3. **Once the base project has been created under task `LT-004`**, open Godot, select **Import**, and choose the repository's `project.godot` file.
-4. Open the main scene and run the project when it becomes available.
-
-Until `LT-004` is implemented, `project.godot` and a runnable game should **not** be assumed to exist. Export/build instructions and a tested PC release will be documented as those tasks are completed.
-
-## Contribution workflow
-
-Use separate branches for task-specific work. Suggested names:
-
-```text
-feature/LT-027-tide-controller
-fix/LT-038-tide-softlock
-docs/LT-012-game-design
+```bash
+git clone https://github.com/ShiroYaksha01/LowTide.git
+cd LowTide
 ```
 
-Suggested commit style:
+Once `dev` exists, use `git switch dev` and `git pull --ff-only origin dev`. Once LT-004 delivers the base project, import `project.godot` in Godot and run the agreed main scene. Do not assume a `dev` branch, project file or playable scene already exists just because this workflow describes them. Build/export instructions will be documented by the relevant task owners.
 
-```text
-feat(LT-027): implement tide state switching
-fix(LT-038): guard against unsafe tide transitions
-docs(LT-012): draft game design document
+## Branching and contribution workflow
+
+`main` is the stable weekly snapshot; `dev` is the integration branch. Every ordinary change originates from `dev` on a task branch and enters `dev` through an independently reviewed PR. Only Tek promotes verified `dev` to `main` during the weekly release window. No routine direct pushes to either shared branch.
+
+```mermaid
+flowchart LR
+    A[feature / fix / docs / test branches] -->|Reviewed PRs| B[dev]
+    B --> C{Integrated candidate passes?}
+    C -->|Yes: weekend promotion by PM| D[main]
+    C -->|No: fix and retest| A
 ```
 
-Before merging, open a pull request that includes the task ID, what changed, how it was tested, and evidence that the acceptance criteria are satisfied. Ask another team member to review it where possible. Agree on formal branching and code-review rules under **`LT-006`**.
+| Branch | Purpose |
+|---|---|
+| `main` | Verified weekly snapshot, instructor review and release |
+| `dev` | Shared integration and testing |
+| `feature/LT-###-name` | Feature implementation |
+| `fix/LT-###-name` | Bug fixes |
+| `docs/LT-###-name` | Documentation |
+| `test/LT-###-name` | Test scenes and experiments |
 
-Do not use commit counts or lines of code as a substitute for measuring quality or individual effort. Credit contributors for implementation, reviews, testing, design, and documentation supported by evidence.
+Example for LT-028 (after the integration branch exists):
 
-## Weekly reporting
+```bash
+git switch dev
+git pull --ff-only origin dev
+git switch -c feature/LT-028-interaction-system
+# Implement and test, then stage only relevant files.
+git add <changed-files>
+git commit -m "feat(LT-028): implement reusable interaction system"
+git push -u origin feature/LT-028-interaction-system
+```
 
-The team should review progress at least once per week and keep task records and the course website aligned.
+Open the PR with base `dev`, link LT-028, describe changes, tests, acceptance evidence and known issues. An independent developer reviews it before merge. Keep PRs small and coordinate scene edits to avoid conflicts. Squash merging task PRs is a proposed convention to finalize under LT-006; preserve contributor attribution through PR history. Use a merge commit for `dev` to `main`, not a squash or rebase of a long-lived integration branch.
 
-A weekly review should answer:
+### Weekly integration cycle
 
-- Which task IDs were verified complete this week, and what evidence supports them?
-- Which tasks remain in progress, blocked, or overdue?
-- Which acceptance criteria or dependencies prevent completion?
-- What was demonstrated or tested?
-- What changed in scope, schedule, ownership, or risk?
-- What is planned for the next week?
+| Day | Activity |
+|---|---|
+| Monday | Team selects work within confirmed capacity |
+| Tuesday–Thursday | Owners implement, test and review; report blockers promptly |
+| Wednesday | Progress and blocker update |
+| Friday | Owner demonstrations, integration review and candidate selection |
+| Saturday | Final checks if available; Saturday evening/night preferred promotion |
+| Sunday | Fallback evening/night promotion if additional fixes or tests are needed |
 
-If written weekly reports are required, the team may add them under `docs/progress/` using filenames such as `week-01.md`. That directory and those reports are **optional future additions**, not assumed to exist today.
+Times are Cambodia local time, with the exact slot agreed by the team. Only Tek merges `dev` into `main`. Weekend work is not assumed; book capacity in advance. If the instructor's check or final deadline requires an earlier snapshot, agree and record the exception ahead of time.
+
+### Stable promotion checklist
+
+- [ ] Identify and test the exact `dev` commit; freeze the candidate during validation. If `dev` changes, revalidate before merging.
+- [ ] Independent task reviews, acceptance criteria and relevant regression tests are recorded.
+- [ ] For the documentation-only stage, check documents, links and evidence. Once the game exists, verify Godot opens and the current playable route works; test export when required.
+- [ ] No known blocking defects in the demonstrated scope; unresolved limitations are recorded.
+- [ ] Owners update task status and actual hours; Tek consolidates the plan and course report.
+- [ ] Another developer reviews the promotion evidence. Tek merges using a merge commit and records the PR, tested commit and date. Optional `week-01`, `week-02` tags may identify stable snapshots.
+
+If any check fails, keep `main` unchanged, record the blocker and fix through a new PR to `dev`. Report the last verified snapshot and work in progress separately. Branch protections, required checks and templates remain LT-006 work owned by SRENG SOPHEAKANHA; this README describes policy, not proof that GitHub settings are configured.
+
+## Task tracking and definition of done
+
+Use `LT-001` through `LT-099` consistently in issues, branches, PRs, commits and evidence. Track Backlog, To do, In progress, In review, Done, and Blocked; record deferred scope separately. Each owner maintains their task, dependencies, estimate, remaining effort, test evidence and availability. A task is verified done only after its acceptance condition passes, independent review and testing are recorded, and applicable changes are integrated into `dev`. Inclusion in `main` is a separate weekly promotion status. Do not mark a deferred task done or count a closed issue as proof. Milestones require demonstrated deliverables.
+
+Each developer logs their own sessions in the individual Markdown file. Record implementation, research, debugging, review, pairing, testing and coordination separately. Both pairing participants record their own time. Tek consolidates weekly progress and forecast; avoid commit counts or lines of code as productivity scores.
 
 ## Instructions for the instructor's AI reviewer
 
-**Purpose:** Produce an evidence-based summary of LowTide's development progress without mistaking plans or activity for delivered functionality.
+**Purpose:** assess progress against evidence, not just plans or status assertions.
 
-### Review procedure
+1. Read this README, the current plan, and the approved scope/charter decisions. Identify the plan version, review date and branch/commit inspected. `main` is the latest verified weekly snapshot; `dev` may contain newer integration work. Distinguish the two explicitly.
+2. Join issues, PRs, commits, test records and reports by exact LT task ID. Check acceptance criteria, dependencies, independent review, and actual demonstration evidence.
+3. Distinguish planned, reported in progress, reported done, verified done, blocked, deferred and unknown. Separately report verified integration on `dev` and inclusion in `main`; do not claim a feature has shipped solely because a PR was opened or merged.
+4. Report planned vs verified progress, milestone readiness, risks, schedule and capacity, and individual contributions supported by evidence. Compare with GIC ITC if accessible; note differences or unavailable data.
+5. Cite the task ID and actual evidence links for substantive findings. Do not invent hours, source files, approvals, reviews, tests, or implementation. If only documents are available, state implementation is unverified.
 
-1. Read **this README** for context and [plan.md](plan.md) for the official repository baseline and task acceptance register.
-2. Read matching GitHub Issues and project-board statuses if accessible. Use exact task IDs `LT-001` through `LT-099` to join records.
-3. Inspect linked pull requests, changed files, review discussions, test outputs, demonstrations, and commits when accessible.
-4. For each task, distinguish **planned**, **reported in progress**, **reported done**, **verified done**, **blocked**, and **unknown**. Mark **verified done** only when acceptance criteria and evidence support it.
-5. Compare task progress against planned dates, dependencies, sprint goals, and milestone criteria. When possible, compare repository reporting with the GIC ITC course website and identify inconsistencies.
-6. Identify individual contributions without treating commit quantity as a quality score. Cite specific task IDs and supporting evidence.
-7. **Do not invent task status, hours worked, missing source files, reviews, or test outcomes.** If evidence or website access is unavailable, say so and identify what could not be verified.
-
-### Suggested progress calculation
+Use separate denominators:
 
 ```text
-Verified completion (%) =
-  (Story Points for verified-done tasks / 329 planned Story Points) × 100
+Full backlog completion = verified completed backlog SP / 329 × 100
+Approved scope completion = verified completed committed SP / approved committed SP × 100
 ```
 
-Use the same approach within a sprint, with its sprint-specific Story Point total as the denominator. Calculate **reported completion** separately if team-reported statuses exceed verified work. These percentages reflect planned scope completion, not software quality or measured hours.
+Report the second metric as not applicable until a committed scope exists; use the approved sprint denominator for sprint progress. Preserve provisional SP history and disclose any re-estimation. Deferred tasks are not delivered functionality. Report task counts and evidence coverage as well as SP.
 
-### Expected AI summary
+## Risks and change control
 
-Provide the following in a concise report:
-
-1. **Assessment date and evidence coverage:** What repositories, issues, PRs, and tests were actually inspected?
-2. **Overall progress:** Verified completed tasks and Story Points out of 99 tasks and 329 Story Points, including unknowns.
-3. **Sprint status:** Current sprint, achieved goals, outstanding work, and planned-versus-verified progress.
-4. **Milestones:** Upcoming, achieved, overdue, or at risk, with evidence.
-5. **Member contributions:** Work attributable to each member, including PRs, reviews, tests, and documentation.
-6. **Blockers and risks:** Unresolved dependencies, softlock risks, schedule pressure, and missing evidence.
-7. **Next actions:** Specific high-priority tasks, their owners, and deadlines.
-
-For all substantive findings, cite a task ID plus a link to the relevant Issue, Pull Request, commit, file, test, or report. **If only the README and plan are available, report planned work and state that implementation progress is unverified.**
-
-## Risks and scope control
-
-The baseline plan identifies major risks involving tide-system stability, progression softlocks, unclear puzzles, room/art integration, member availability, course-calendar capacity, and release readiness.
-
-The planned response is to protect the seven-room puzzle MVP, test unsafe state transitions, prefer readable reusable assets, and avoid unapproved scope additions after the **15 January 2027 feature freeze**. See [plan.md](plan.md) for risk owners, triggers, and responses.
+Protect safe tide switching, ability-gated progression, checkpoint recovery, readable feedback, a complete ending and verified Windows export. Defer combat and decorative polish first; negotiate reduced room count or puzzle complexity before overcommitting. Scope/deadline changes require PM coordination, team agreement and instructor approval where required. No new features after the January 15 forecast freeze without an approved exception. See [plan.md](plan.md) for capacity, risk owners and response triggers.
 
 ## Attribution and assets
 
-Asset suitability and licenses are scheduled for review under **`LT-010`**. Any third-party assets should have their source and license recorded before use. This README does not declare a license for the repository or its original contents.
+Record third-party sources and licenses under LT-010 before shipping. No repository license is declared by this README. Technical architecture, contribution guidelines and asset register are deliverables owned by their assigned developers, not assumed complete.
 
 ---
-
-**Source of detailed project requirements:** [Project plan, v0.5](plan.md). Update this README when major scope, schedule, onboarding, or reporting conventions change, and keep the plan and course website synchronized.
+Source of planning detail: [v0.11 plan](plan.md). Keep the repository, working agreement and course plan synchronized with approved changes and evidence.

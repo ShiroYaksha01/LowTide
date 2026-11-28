@@ -1,0 +1,254 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/tests/animation_test.gd" id="1_room"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="PackedScene" path="res://scenes/tests/practice_crate.tscn" id="3_crate"]
+[ext_resource type="Script" path="res://scripts/tests/practice_switch.gd" id="4_switch"]
+
+[sub_resource type="RectangleShape2D" id="MainFloor"]
+size = Vector2(790, 188)
+
+[sub_resource type="RectangleShape2D" id="FarBank"]
+size = Vector2(137, 188)
+
+[sub_resource type="RectangleShape2D" id="PoolBed"]
+size = Vector2(225, 58)
+
+[sub_resource type="RectangleShape2D" id="RoomWall"]
+size = Vector2(16, 648)
+
+[sub_resource type="RectangleShape2D" id="WaterArea"]
+size = Vector2(225, 120)
+
+[sub_resource type="RectangleShape2D" id="SwitchArea"]
+size = Vector2(22, 55)
+
+[sub_resource type="RectangleShape2D" id="EnemyBody"]
+size = Vector2(44, 64)
+
+[sub_resource type="Animation" id="LampReset"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Bulb:color")
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.28, 0.34, 0.36, 1)]
+}
+
+[sub_resource type="Animation" id="LampOn"]
+resource_name = "lamp_on"
+length = 0.18
+tracks/0/type = "value"
+tracks/0/path = NodePath("Bulb:color")
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.11, 0.18),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.28, 0.34, 0.36, 1), Color(1, 0.80, 0.48, 1), Color(0.72, 0.44, 0.24, 1), Color(1, 0.65, 0.28, 1)]
+}
+
+[sub_resource type="Animation" id="LampOff"]
+resource_name = "lamp_off"
+length = 0.12
+tracks/0/type = "value"
+tracks/0/path = NodePath("Bulb:color")
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0.65, 0.28, 1), Color(0.28, 0.34, 0.36, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="LampLibrary"]
+_data = {&"RESET": SubResource("LampReset"), &"lamp_off": SubResource("LampOff"), &"lamp_on": SubResource("LampOn")}
+
+[node name="AnimationTest" type="Node2D"]
+script = ExtResource("1_room")
+
+[node name="Backdrop" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Color" type="ColorRect" parent="Backdrop"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.047, 0.075, 0.102, 1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="Terrain" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="MainFloor" type="CollisionShape2D" parent="Terrain"]
+position = Vector2(395, 554)
+shape = SubResource("MainFloor")
+
+[node name="FarBank" type="CollisionShape2D" parent="Terrain"]
+position = Vector2(1083.5, 554)
+shape = SubResource("FarBank")
+
+[node name="PoolBed" type="CollisionShape2D" parent="Terrain"]
+position = Vector2(902.5, 619)
+shape = SubResource("PoolBed")
+
+[node name="LeftWall" type="CollisionShape2D" parent="Terrain"]
+position = Vector2(-8, 324)
+shape = SubResource("RoomWall")
+
+[node name="RightWall" type="CollisionShape2D" parent="Terrain"]
+position = Vector2(1160, 324)
+shape = SubResource("RoomWall")
+
+[node name="Ground" type="Polygon2D" parent="Terrain"]
+color = Color(0.085, 0.134, 0.158, 1)
+polygon = PackedVector2Array(0, 460, 790, 460, 790, 590, 1015, 590, 1015, 460, 1152, 460, 1152, 648, 0, 648)
+
+[node name="GroundEdge" type="Line2D" parent="Terrain"]
+points = PackedVector2Array(0, 460, 790, 460, 790, 590, 1015, 590, 1015, 460, 1152, 460)
+width = 2.0
+default_color = Color(0.28, 0.42, 0.44, 1)
+
+[node name="Pool" type="Polygon2D" parent="Terrain"]
+color = Color(0.057, 0.23, 0.29, 1)
+polygon = PackedVector2Array(790, 470, 1015, 470, 1015, 590, 790, 590)
+
+[node name="Waterline" type="Line2D" parent="Terrain"]
+points = PackedVector2Array(790, 470, 1015, 470)
+width = 2.0
+default_color = Color(0.34, 0.72, 0.74, 1)
+
+[node name="PoolLabel" type="Label" parent="Terrain"]
+offset_left = 790.0
+offset_top = 425.0
+offset_right = 1015.0
+theme_override_colors/font_color = Color(0.52, 0.77, 0.79, 1)
+theme_override_font_sizes/font_size = 18
+text = "Swim pool"
+horizontal_alignment = 1
+
+[node name="Water" type="Area2D" parent="."]
+position = Vector2(902.5, 530)
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+
+[node name="Shape" type="CollisionShape2D" parent="Water"]
+shape = SubResource("WaterArea")
+
+[node name="Switch" type="Area2D" parent="."]
+position = Vector2(177, 431)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("4_switch")
+
+[node name="Shape" type="CollisionShape2D" parent="Switch"]
+shape = SubResource("SwitchArea")
+
+[node name="Post" type="Polygon2D" parent="Switch"]
+color = Color(0.23, 0.34, 0.37, 1)
+polygon = PackedVector2Array(-10, 29, -10, -16, -6, -24, 6, -24, 10, -16, 10, 29)
+
+[node name="Bulb" type="Polygon2D" parent="Switch"]
+color = Color(0.28, 0.34, 0.36, 1)
+polygon = PackedVector2Array(-6, -7, -6, -17, -2, -20, 2, -20, 6, -17, 6, -7)
+
+[node name="Label" type="Label" parent="Switch"]
+offset_left = -90.0
+offset_top = 40.0
+offset_right = 90.0
+theme_override_colors/font_color = Color(0.82, 0.72, 0.54, 1)
+theme_override_font_sizes/font_size = 18
+text = "Lamp switch"
+horizontal_alignment = 1
+
+[node name="Crate" parent="." instance=ExtResource("3_crate")]
+position = Vector2(671, 438)
+
+[node name="LampAnimation" type="AnimationPlayer" parent="Switch" unique_id=85764010]
+libraries = {&"": SubResource("LampLibrary")}
+
+[node name="PracticeEnemy" type="Area2D" parent="."]
+position = Vector2(485, 428)
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+
+[node name="Hurtbox" type="CollisionShape2D" parent="PracticeEnemy"]
+shape = SubResource("EnemyBody")
+
+[node name="Shell" type="Polygon2D" parent="PracticeEnemy"]
+polygon = PackedVector2Array(-22, 32, -22, -13, -13, -29, 13, -29, 22, -13, 22, 32)
+color = Color(0.75, 0.38, 0.24, 1)
+
+[node name="Face" type="Polygon2D" parent="PracticeEnemy"]
+polygon = PackedVector2Array(-15, -10, 15, -10, 15, 13, -15, 13)
+color = Color(0.20, 0.12, 0.14, 1)
+
+[node name="Eyes" type="Line2D" parent="PracticeEnemy"]
+points = PackedVector2Array(-8, -1, 8, -1)
+width = 4.0
+default_color = Color(1, 0.82, 0.51, 1)
+
+[node name="EnemyLabel" type="Label" parent="PracticeEnemy"]
+offset_left = -100.0
+offset_top = 43.0
+offset_right = 100.0
+theme_override_colors/font_color = Color(0.93, 0.67, 0.49, 1)
+theme_override_font_sizes/font_size = 18
+text = "Pogo dummy"
+horizontal_alignment = 1
+
+[node name="FlashTimer" type="Timer" parent="PracticeEnemy"]
+wait_time = 0.18
+one_shot = true
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(325, 460)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="PanelContainer" parent="HUD"]
+offset_left = 32.0
+offset_top = 24.0
+mouse_filter = 2
+
+[node name="Margin" type="MarginContainer" parent="HUD/Panel"]
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 14
+
+[node name="Rows" type="VBoxContainer" parent="HUD/Panel/Margin"]
+theme_override_constants/separation = 4
+
+[node name="Title" type="Label" parent="HUD/Panel/Margin/Rows"]
+theme_override_colors/font_color = Color(0.97, 0.82, 0.62, 1)
+theme_override_font_sizes/font_size = 24
+text = "Animation test"
+
+[node name="Movement" type="Label" parent="HUD/Panel/Margin/Rows"]
+text = "A / D  Move    W  Jump    Space (hold)  Sprint    R  Reset"
+
+[node name="Interactions" type="Label" parent="HUD/Panel/Margin/Rows"]
+text = "E  Use switch    Hold F + A / D  Push or pull crate    H  Test hurt"
+
+[node name="Combat" type="Label" parent="HUD/Panel/Margin/Rows"]
+text = "Right Shift  Hook    W + Right Shift  Up    S + Right Shift  Down"
+
+[node name="Practice" type="Label" parent="HUD/Panel/Margin/Rows"]
+text = "Slash down over the dummy to bounce. In the pool, W / S  Swim up / down."
+
+[node name="Status" type="Label" parent="HUD/Panel/Margin/Rows"]
+unique_name_in_owner = true
+theme_override_colors/font_color = Color(0.52, 0.83, 0.8, 1)
+text = "Animation: idle    Hits: 0    Pogos: 0"
+
+[connection signal="timeout" from="PracticeEnemy/FlashTimer" to="." method="_on_dummy_flash_finished"]
+[connection signal="target_hit" from="Player" to="." method="_on_target_hit"]

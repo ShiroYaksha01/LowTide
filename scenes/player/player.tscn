@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://dwuncj3r72ix5"]
+
+[ext_resource type="Script" uid="uid://6hdn6hxkarx5" path="res://scripts/player/player.gd" id="1_player"]
+[ext_resource type="SpriteFrames" path="res://sprite/player/player_frames.tres" id="2_frames"]
+
+[sub_resource type="RectangleShape2D" id="BodyShape"]
+size = Vector2(34, 76)
+
+[sub_resource type="RectangleShape2D" id="InteractionShape"]
+size = Vector2(92, 74)
+
+[sub_resource type="RectangleShape2D" id="WaterShape"]
+size = Vector2(2, 2)
+
+[sub_resource type="RectangleShape2D" id="HookShape"]
+size = Vector2(79, 65)
+
+[sub_resource type="RectangleShape2D" id="UpShape"]
+size = Vector2(78, 77)
+
+[sub_resource type="RectangleShape2D" id="DownShape"]
+size = Vector2(58, 91)
+
+[node name="Player" type="CharacterBody2D" unique_id=1392791209]
+collision_layer = 32
+collision_mask = 9
+script = ExtResource("1_player")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=253861057]
+texture_filter = 1
+position = Vector2(0, -52)
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("2_frames")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="BodyShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -38)
+shape = SubResource("BodyShape")
+
+[node name="InteractionReach" type="Area2D" parent="."]
+position = Vector2(0, -36)
+collision_layer = 0
+collision_mask = 12
+monitorable = false
+
+[node name="Shape" type="CollisionShape2D" parent="InteractionReach"]
+shape = SubResource("InteractionShape")
+
+[node name="WaterProbe" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+
+[node name="Shape" type="CollisionShape2D" parent="WaterProbe"]
+shape = SubResource("WaterShape")
+
+[node name="HookReach" type="ShapeCast2D" parent="."]
+position = Vector2(47.5, -50.5)
+enabled = false
+shape = SubResource("HookShape")
+target_position = Vector2(0, 0)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="UpReach" type="ShapeCast2D" parent="."]
+position = Vector2(0, -84.5)
+enabled = false
+shape = SubResource("UpShape")
+target_position = Vector2(0, 0)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="DownReach" type="ShapeCast2D" parent="."]
+position = Vector2(0, 7.5)
+enabled = false
+shape = SubResource("DownShape")
+target_position = Vector2(0, 0)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animation_finished"]
